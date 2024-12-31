@@ -1,28 +1,31 @@
 import React from "react";
 
 
+
 const About = () => {
     return (
-        <div className="bg-white py-16">
-            <div className="flex items-center justify-center px-6 lg:px-8">
-                <div className="text-center max-w-3xl space-y-6">
-                    <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+        <main className="bg-white py-16 animate-fade-in">
+            <article className="flex items-center justify-center px-6 lg:px-8">
+                <section className="text-center max-w-3xl space-y-6">
+                    <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                         Butchery At Its Finest
-                    </h2>
+                    </h1>
                     <p className="text-lg leading-relaxed text-gray-600 sm:text-xl">
-                        At Jagger's Butchery, we are committed to transforming the meat industry in Nigeria by providing healthy, hygienic meats that are free from microorganisms and contaminants.
+                        At Jagger's Butchery, we're not just another meat shop – we're pioneering a new era in Nigeria's meat industry.
                     </p>
                     <p className="text-lg leading-relaxed text-gray-600 sm:text-xl">
-                        From farm to table, we prioritize the highest standards of cleanliness and quality. Our meats are well-washed, expertly cut, and preserved using advanced lyophilization techniques to retain 100% of their nutrients.
+                        In a market where traditional butchering practices often fall short of modern health standards, we're introducing a revolutionary approach. Our state-of-the-art facility ensures that every piece of meat you receive is handled with the utmost care and precision.
                     </p>
                     <p className="text-lg leading-relaxed text-gray-600 sm:text-xl">
-                        Experience the difference with Jagger's Butchery, where we are dedicated to providing you with the finest cuts of meat in a clean and hygienic environment.
+                        Through our advanced lyophilization process, we preserve 100% of the nutrients present at the time of processing, delivering meat that's not just safe, but exceptionally nutritious.
                     </p>
-                </div>
-            </div>
-        </div>
-
+                    <p className="text-lg leading-relaxed text-gray-600 sm:text-xl">
+                        We believe every Nigerian deserves access to high-quality, safe meat products. Our efficient processes allow us to offer premium standards at prices accessible to the everyday consumer.
+                    </p>
+                </section>
+            </article>
+        </main>
     );
 };
 
-export default About
+export default About;
