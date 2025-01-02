@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      scrollBehaviour: {
+        smooth: 'smooth',
+      },
+
       fontFamily: {
         lobster: ['Lobster', 'cursive'],
         pacifico: ['Pacifico', 'cursive'],
@@ -23,9 +27,15 @@ export default {
       },
 
       animation: {
-        fadeIn: 'fadeIn 0.5s ease-out forwards',
+        fadeIn: 'fadeIn 1s ease-in forwards',
     },
   }
 },
-  plugins: [],
+  plugins: [
+    function ({ addBase }) {
+      addBase({
+        html: { scrollBehaviour: 'smooth' },
+      });
+    },
+  ],
 }

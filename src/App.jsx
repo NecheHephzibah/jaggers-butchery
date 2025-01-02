@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import About from "./components/About";
 import FeaturesSection from "./components/FeaturesSection";
 import ProductsSection from "./components/ProductsSection";
+import Partners from "./components/Partners";
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <About />
       <FeaturesSection />
       <ProductsSection />
+      <Partners />
     </>
   );
 };

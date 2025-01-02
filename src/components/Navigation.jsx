@@ -6,8 +6,8 @@ import { GiMeat } from "react-icons/gi";
 
 const navigation = [
     { name: "Home", href: "#", icon: HomeIcon, current: true },
-    { name: "Our Meat", href: "#", icon: GiMeat, current: false },
-    { name: "About", href: "#", icon: UserGroupIcon, current: false },
+    { name: "Our Meat", href: "ProductsSection.jsx", icon: GiMeat, current: false },
+    { name: "About", href: "About.jsx", icon: UserGroupIcon, current: false },
     { name: "Contact", href: "#", icon: PhoneIcon, current: false },
 ];
 

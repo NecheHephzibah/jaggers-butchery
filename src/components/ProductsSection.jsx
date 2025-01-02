@@ -28,7 +28,7 @@ const ProductCard = ({ name, category, price, description, quality, imageUrl }) 
             }`}
           />
         </div>
-        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm animate-fadeIn">
+        <div className="absolute top-4 right-4 bg-yellow-700 text-white px-3 py-1 rounded-full text-sm animate-fadeIn">
           {quality}
         </div>
       </div>
@@ -50,7 +50,7 @@ const ProductCard = ({ name, category, price, description, quality, imageUrl }) 
               <StarIcon key={i} className="w-4 h-4 text-yellow-400" />
             ))}
           </div>
-          <span className="text-2xl font-bold text-blue-600">₦{price}</span>
+          <span className="text-2xl font-bold text-yellow-700">₦{price}</span>
         </div>
 
         <button
@@ -58,7 +58,7 @@ const ProductCard = ({ name, category, price, description, quality, imageUrl }) 
           className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-300 transform ${
             isAdded 
               ? 'bg-green-500 text-white hover:bg-green-600'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
+              : 'bg-orange-500 text-white hover:bg-orange-700'
           } flex items-center justify-center gap-2`}
         >
           {isAdded ? (
@@ -142,10 +142,10 @@ const ProductsSection = () => {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4 animate-fadeIn">
-          Our Premium Products
+          Buy Meat
         </h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto animate-fadeIn">
-          Experience the finest cuts of meat, processed and preserved using state-of-the-art technology 
+          Get the finest cuts of meat, processed and preserved using state-of-the-art technology 
           to maintain peak freshness and nutritional value.
         </p>
 
@@ -156,7 +156,7 @@ const ProductsSection = () => {
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
                 activeCategory === category
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-gray-500 text-white'
                   : 'bg-white text-gray-600 hover:bg-gray-100'
               }`}
               style={{
