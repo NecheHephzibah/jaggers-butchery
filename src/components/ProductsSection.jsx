@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { GiCow, GiGoat, GiChicken } from 'react-icons/gi';
 import { StarIcon } from '@heroicons/react/24/solid';
-import { ShoppingCartIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { BsBasket, BsCheckLg } from 'react-icons/bs';
+
 
 const ProductCard = ({ name, category, price, description, quality, imageUrl }) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -28,9 +29,9 @@ const ProductCard = ({ name, category, price, description, quality, imageUrl }) 
             }`}
           />
         </div>
-        <div className="absolute top-4 right-4 bg-yellow-700 text-white px-3 py-1 rounded-full text-sm animate-fadeIn">
+        {/* <div className="absolute top-4 right-4 bg-yellow-700 text-white px-3 py-1 rounded-full text-sm animate-fadeIn">
           {quality}
-        </div>
+        </div> */}
       </div>
       
       <div className="p-6">
@@ -45,34 +46,38 @@ const ProductCard = ({ name, category, price, description, quality, imageUrl }) 
         <p className="text-gray-600 mb-4 text-sm">{description}</p>
         
         <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <StarIcon key={i} className="w-4 h-4 text-yellow-400" />
             ))}
-          </div>
-          <span className="text-2xl font-bold text-yellow-700">₦{price}</span>
+          </div> */}
+          <span className="text-2xl font-medium text-black-700">₦{price}</span>
+
+
+          <button
+            onClick={handleAddToCart}
+            className={`px-3 py-1.5 rounded-lg font-bold text-sm transition-all duration-300 transform ${
+              isAdded 
+                ? 'bg-green-500 text-white hover:bg-green-600'
+                : 'bg-yellow-700 text-white hover:bg-yellow-900'
+            } flex items-center justify-center gap-1.5`}
+          >
+            {isAdded ? (
+              <>
+                <BsCheckLg className="w-4 h-4 animate-bounce" />
+                Added to Basket
+              </>
+            ) : (
+              <>
+                <BsBasket className="w-4 h-4" />
+                Add to Basket
+              </>
+            )}
+          </button>
+
         </div>
 
-        <button
-          onClick={handleAddToCart}
-          className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-300 transform ${
-            isAdded 
-              ? 'bg-green-500 text-white hover:bg-green-600'
-              : 'bg-orange-500 text-white hover:bg-orange-700'
-          } flex items-center justify-center gap-2`}
-        >
-          {isAdded ? (
-            <>
-              <CheckIcon className="w-5 h-5 animate-bounce" />
-              Added to Cart
-            </>
-          ) : (
-            <>
-              <ShoppingCartIcon className="w-5 h-5" />
-              Add to Cart
-            </>
-          )}
-        </button>
+        
       </div>
     </div>
   );
@@ -88,7 +93,6 @@ const ProductsSection = () => {
       name: "Premium Beef Tenderloin",
       category: "Beef",
       price: "12,500/kg",
-      description: "Ultra-tender, lyophilized beef tenderloin. Perfect for steaks and premium dishes.",
       quality: "Premium Cut",
       imageUrl: "/beef-tenderloin.jpg"
     },
@@ -96,7 +100,6 @@ const ProductsSection = () => {
       name: "Lean Goat Meat",
       category: "Goat",
       price: "8,500/kg",
-      description: "Fresh, carefully processed goat meat. Ideal for pepper soup and grilling.",
       quality: "Select Cut",
       imageUrl: "/goat-meat.jpg"
     },
@@ -104,7 +107,6 @@ const ProductsSection = () => {
       name: "Whole Chicken",
       category: "Chicken",
       price: "5,500/kg",
-      description: "Farm-fresh chicken, professionally processed and preserved.",
       quality: "Premium Quality",
       imageUrl: "/chicken.jpg"
     },
@@ -112,7 +114,6 @@ const ProductsSection = () => {
       name: "Beef Short Ribs",
       category: "Beef",
       price: "9,500/kg",
-      description: "Well-marbled, flavorful beef ribs. Perfect for slow cooking and grilling.",
       quality: "Choice Cut",
       imageUrl: "/beef-ribs.jpg"
     },
@@ -120,7 +121,6 @@ const ProductsSection = () => {
       name: "Goat Legs",
       category: "Goat",
       price: "7,500/kg",
-      description: "Premium goat legs, perfect for special occasions and traditional dishes.",
       quality: "Premium Cut",
       imageUrl: "/goat-legs.jpg"
     },
@@ -128,7 +128,6 @@ const ProductsSection = () => {
       name: "Chicken Wings",
       category: "Chicken",
       price: "4,500/kg",
-      description: "Fresh chicken wings, ideal for grilling and frying.",
       quality: "Select Quality",
       imageUrl: "/chicken-wings.jpg"
     }
@@ -139,9 +138,9 @@ const ProductsSection = () => {
     : products.filter(product => product.category === activeCategory);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50" id='products'>
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4 animate-fadeIn">
+        <h2 className="text-4xl font-medium text-center text-gray-900 mb-4 animate-fadeIn">
           Buy Meat
         </h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto animate-fadeIn">

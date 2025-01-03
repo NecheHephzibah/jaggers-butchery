@@ -5,6 +5,9 @@ import About from "./components/About";
 import FeaturesSection from "./components/FeaturesSection";
 import ProductsSection from "./components/ProductsSection";
 import Partners from "./components/Partners";
+import Contact from "./components/Contact";
+import Testimonials from "./components/Testimonials";
+import Footer from "./components/Footer";
 
 
 const App = () => {
@@ -15,7 +18,10 @@ const App = () => {
       <About />
       <FeaturesSection />
       <ProductsSection />
+      <Testimonials />
       <Partners />
+      <Contact />
+      <Footer />
     </>
   );
 };

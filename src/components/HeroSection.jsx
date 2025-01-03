@@ -103,6 +103,7 @@ const HeroSection = () => {
         className={`absolute inset-0 transition-all duration-1000 ${
           isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
         }`}
+        id='hero'
       >
         {!isLoaded && (
           <div className="absolute inset-0 bg-gray-900 animate-pulse flex items-center justify-center">

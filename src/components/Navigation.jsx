@@ -5,10 +5,10 @@ import { UserCircle } from "lucide-react";
 import { GiMeat } from "react-icons/gi";
 
 const navigation = [
-    { name: "Home", href: "#", icon: HomeIcon, current: true },
-    { name: "Our Meat", href: "ProductsSection.jsx", icon: GiMeat, current: false },
-    { name: "About", href: "About.jsx", icon: UserGroupIcon, current: false },
-    { name: "Contact", href: "#", icon: PhoneIcon, current: false },
+    { name: "Home", href: "#hero", icon: HomeIcon, current: true },
+    { name: "Our Meat", href: "#products", icon: GiMeat, current: false },
+    { name: "About", href: "#about", icon: UserGroupIcon, current: false },
+    { name: "Contact", href: "#contact", icon: PhoneIcon, current: false },
 ];
 
 function classNames(...classes) {
