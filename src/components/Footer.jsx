@@ -9,25 +9,25 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Jagger's Butchery</h3>
             <p className="text-red-100">
-              Your trusted local butcher since 1985. Providing premium cuts, expert advice, and exceptional service to our community.
+              Your trusted butcher. Providing premium cuts, expert advice, delicious recipes, and exceptional service to our community.
             </p>
           </div>
           
           <div>
             <h3 className="text-xl font-bold mb-4">Our Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-red-200 transition-colors">Premium Cuts</a></li>
-              <li><a href="#" className="hover:text-red-200 transition-colors">Catering Services</a></li>
-              <li><a href="#" className="hover:text-red-200 transition-colors">Bulk Orders</a></li>
-              <li><a href="#" className="hover:text-red-200 transition-colors">Special Orders</a></li>
+              <li><a href="#contact" className="hover:text-red-200 transition-colors">Premium Cuts</a></li>
+              <li><a href="#contact" className="hover:text-red-200 transition-colors">Catering Services</a></li>
+              <li><a href="#contact" className="hover:text-red-200 transition-colors">Bulk Orders</a></li>
+              <li><a href="#contact" className="hover:text-red-200 transition-colors">Special Orders</a></li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li><a href="tel:1234567890" className="hover:text-red-200 transition-colors">(123) 456-7890</a></li>
-              <li><a href="mailto:info@jaggersbutchery.com" className="hover:text-red-200 transition-colors">info@jaggersbutchery.com</a></li>
+              <li><a href="tel:+2349069942948" className="hover:text-red-200 transition-colors">(234) 90-699-42948</a></li>
+              <li><a href="mailto:neche.bless@gmail.com" className="hover:text-red-200 transition-colors">neche.bless@gmail.com</a></li>
               <li className="flex items-center space-x-2">
                 <BsPinMap size={20} />
                 <span>123 Butcher Street, Meatville, ST 12345</span>
