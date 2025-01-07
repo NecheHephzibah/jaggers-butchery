@@ -2,6 +2,7 @@
 # I also define methods to convert the data in the tables to dictionaries for easy serialization to JSON.
 # I also define the database connection object, db, which is used to interact with the database. 
 
+
 from . import db
 from datetime import datetime
 from flask_login import UserMixin

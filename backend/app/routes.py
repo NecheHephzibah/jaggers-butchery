@@ -1,4 +1,3 @@
-# routes.py
 from flask import Blueprint, request, jsonify, session
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -98,7 +97,7 @@ def manage_cart():
             db.session.add(cart_item)
         
         db.session.commit()
-        return jsonify({'message': 'Item added to cart'})
+        return jsonify({'message': 'Item added to basket'})
     
     elif request.method == 'DELETE':
         data = request.json
@@ -107,7 +106,7 @@ def manage_cart():
             product_id=data['product_id']
         ).delete()
         db.session.commit()
-        return jsonify({'message': 'Item removed from cart'})
+        return jsonify({'message': 'Item removed from basket'})
 
 @main.route('/api/checkout', methods=['POST'])
 @jwt_required()
@@ -116,7 +115,7 @@ def checkout():
     user = User.query.get(current_user_id)
     
     if not user.cart_items:
-        return jsonify({'error': 'Cart is empty'}), 400
+        return jsonify({'error': 'Basket is empty'}), 400
     
     try:
         # Generate unique reference
