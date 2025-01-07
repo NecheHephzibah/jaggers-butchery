@@ -1,12 +1,12 @@
 # Import necessary modules
 import os
 from flask import Flask
-from flask_wtf.csrf import CSRFProtect # type: ignore
-from flask_sqlalchemy import SQLAlchemy # type: ignore
-from flask_migrate import Migrate # type: ignore
-from flask_bcrypt import Bcrypt # type: ignore
-from flask_login import LoginManager # type: ignore
-from paystackapi.paystack import Paystack # type: ignore
+from flask_wtf.csrf import CSRFProtect
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+from paystackapi.paystack import Paystack
 from flask_cors import CORS
 
 # Initialize Flask application

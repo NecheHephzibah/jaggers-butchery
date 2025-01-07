@@ -1,12 +1,11 @@
 #models.py, where i define the structure of my database tables and the relationships between them. 
 # I also define methods to convert the data in the tables to dictionaries for easy serialization to JSON.
 # I also define the database connection object, db, which is used to interact with the database. 
-
-
-from . import db
+from market import db
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +23,7 @@ class Product(db.Model):
             'id': self.id,
             'name': self.name,
             'category': self.category,
-            'price': f"₦{self.price:,.2f}/kg",
+            'price': f"\u20a6{self.price:,.2f}/kg",
             'description': self.description,
             'imageUrl': self.imageUrl,
             'owner': self.owner
