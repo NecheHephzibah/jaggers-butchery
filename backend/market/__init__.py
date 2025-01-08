@@ -9,7 +9,7 @@ from flask_login import LoginManager
 from paystackapi.paystack import Paystack
 from flask_cors import CORS
 
-# Initialize extensions first, before creating app
+# Initializing extensions
 db = SQLAlchemy()
 csrf = CSRFProtect()
 bcrypt = Bcrypt()
@@ -23,13 +23,10 @@ def create_app():
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
     # Configure database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///butchery.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    # Set secret key for session management
     app.config['SECRET_KEY'] = '8f2d191c390fdb4fd3c7c13105dc5e91ba25c5bd6e9a2c6c'
 
-    # Configure Paystack API keys
     app.config['PAYSTACK_SECRET_KEY'] = os.environ.get('PAYSTACK_SECRET_KEY', 'sk_test_b9ea25fc47d33cac3542bc25ae63ef415be85782')
     app.config['PAYSTACK_PUBLIC_KEY'] = os.environ.get('PAYSTACK_PUBLIC_KEY', 'pk_test_3e90032c631e39cd94623b61bcf7dadafe7ab4a7')
 

@@ -3,6 +3,8 @@ import { HomeIcon, UserGroupIcon, PhoneIcon } from "@heroicons/react/24/outline"
 import { Menu, X } from "lucide-react";
 import { UserCircle } from "lucide-react";
 import { GiMeat } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+
 
 const navigation = [
     { name: "Home", href: "#hero", icon: HomeIcon, current: true },
@@ -57,13 +59,13 @@ const Navigation = () => {
 
                     {/* Login Button - Desktop */}
                     <div className="hidden md:flex items-center">
-                        <a
-                            href="#"
+                        <Link
+                            to="/auth"
                             className="flex items-center space-x-2 px-4 py-2 rounded-full bg-yellow-50 text-black hover:bg-yellow-150 transition-colors duration-200"
                         >
                             <span className="text-sm font-light">Sign in</span>
                             <UserCircle className="w-4 h-4" />
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -74,7 +76,7 @@ const Navigation = () => {
                     >
                         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
-                    
+
 
                 </div>
             </div>
@@ -107,13 +109,13 @@ const Navigation = () => {
                         ))}
 
                         {/* Login Button - Mobile */}
-                        <a
-                            href="#"
+                        <Link
+                            to="/auth"
                             className="flex items-center space-x-3 p-3 text-yellow-500 bg-yellow-50 rounded-lg"
                         >
                             <UserCircle className="h-5 w-5" />
                             <span className="text-sm font-light">Sign in</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

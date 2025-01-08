@@ -7,13 +7,13 @@ from paystackapi.paystack import Paystack
 import secrets
 
 main = Blueprint('main', __name__)
-paystack = Paystack()  # Initialize Paystack with your secret key
+paystack = Paystack() 
 
 @main.route('/api/auth/register', methods=['POST'])
 def register():
-    data = request.json
+    data = request.json()
     if User.query.filter_by(email=data['email']).first():
-        return jsonify({'error': 'Email already registered'}), 409
+        return jsonify({'error': 'Email already registered'}), 400
     
     user = User(
         email=data['email'],

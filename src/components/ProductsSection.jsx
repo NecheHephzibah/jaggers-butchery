@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { GiCow, GiGoat, GiChicken } from 'react-icons/gi';
 import { BsBasket, BsCheckLg } from 'react-icons/bs';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from './ui/alert';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductCard = ({ product, onAddToCart }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
 
   const handleAddToCart = async () => {
     try {
+      const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId'); //getting user id from local storage
-      if (!userId) {
-        setError('Please login to add items to basket');
-        return;
-      }
+      
+      if (!token || !userId) {
+        // Redirect to auth page if user is not logged in
+        navigate('/auth', { 
+          state: { 
+            redirectAfterAuth: '/checkout',
+              message: 'Please login or register to add items to your basket' 
+            } 
+          });
+          return; // Add return to prevent further execution
+        }
 
       const response = await fetch('/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           user_id: userId,
