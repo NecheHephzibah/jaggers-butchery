@@ -1,53 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { GiCow, GiGoat, GiChicken } from 'react-icons/gi';
+import React, { useState } from 'react';
+import { GiCow, GiPig, GiChicken, GiDeer } from 'react-icons/gi';
 import { BsBasket, BsCheckLg } from 'react-icons/bs';
-import { Alert, AlertDescription } from './ui/alert';
+import Alert from './Alert';
 import { useNavigate } from 'react-router-dom';
 
-
-const ProductCard = ({ product, onAddToCart }) => {
-  const [isAdded, setIsAdded] = useState(false);
+const ProductsSection = ({ products = [] }) => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [isHovered, setIsHovered] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
+  const categories = ['All', 'Beef', 'Chicken', 'Pork', 'Venison'];
 
-  const handleAddToCart = async () => {
+  const filteredProducts = selectedCategory === 'All'
+    ? products
+    : products.filter(product => product.category === selectedCategory);
+
+  const handleAddToCart = async (product) => {
     try {
       const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId'); //getting user id from local storage
-      
-      if (!token || !userId) {
-        // Redirect to auth page if user is not logged in
-        navigate('/auth', { 
-          state: { 
-            redirectAfterAuth: '/checkout',
-              message: 'Please login or register to add items to your basket' 
-            } 
-          });
-          return; // Add return to prevent further execution
-        }
-
-      const response = await fetch('/api/order', {
+      const userId = localStorage.getItem('userId');
+      const response = await fetch('/api/add-to-cart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-          user_id: userId,
-          product_id: product.id,
-          quantity: 1,
-          total_price: parseFloat(product.price.replace(/[^\d.]/g, ''))
-        })
+        body: JSON.stringify({ userId, productId: product.id })
       });
-
+      const data = await response.json();
       if (response.ok) {
         setIsAdded(true);
         setTimeout(() => setIsAdded(false), 2000);
-        onAddToCart(product);
       } else {
-        const data = await response.json();
         setError(data.message || 'Failed to add to basket');
       }
     } catch (err) {
@@ -55,137 +40,70 @@ const ProductCard = ({ product, onAddToCart }) => {
     }
   };
 
-  return (
-    <div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {error && (
-        <Alert variant="destructive" className="mb-4">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-
-      <div className="relative">
-        <div className="aspect-w-16 aspect-h-9">
-          <img 
-            src={product.imageUrl || "/api/placeholder/400/300" }
-            alt={product.name}
-            className={`w-full h-64 object-cover transition-transform duration-700 ${
-              isHovered ? 'scale-110' : 'scale-100'
-            }`}
-          />
-        </div>
-        {/* <div className="absolute top-4 right-4 bg-yellow-700 text-white px-3 py-1 rounded-full text-sm animate-fadeIn">
-          {quality}
-        </div> */}
-      </div>
-      
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-2">
-          {category === 'Beef' && <GiCow className="text-red-600 w-5 h-5" />}
-          {category === 'Goat' && <GiGoat className="text-red-600 w-5 h-5" />}
-          {category === 'Chicken' && <GiChicken className="text-red-600 w-5 h-5" />}
-          <span className="text-gray-600 text-sm">{category}</span>
-        </div>
-        
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-        <p className="text-gray-600 mb-4 text-sm">{description}</p>
-        
-        <div className="flex justify-between items-center mb-4">
-          {/* <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <StarIcon key={i} className="w-4 h-4 text-yellow-400" />
-            ))}
-          </div> */}
-          <span className="text-2xl font-medium text-black-700">₦{price}</span>
-
-
-          <button
-            onClick={handleAddToCart}
-            className={`px-3 py-1.5 rounded-lg font-bold text-sm transition-all duration-300 transform ${
-              isAdded 
-                ? 'bg-green-500 text-white hover:bg-green-600'
-                : 'bg-yellow-700 text-white hover:bg-yellow-900'
-            } flex items-center justify-center gap-1.5`}
-          >
-            {isAdded ? (
-              <>
-                <BsCheckLg className="w-4 h-4 animate-bounce" />
-                Added to Basket
-              </>
-            ) : (
-              <>
-                <BsBasket className="w-4 h-4" />
-                Add to Basket
-              </>
-            )}
-          </button>
-
-        </div>
-
-        
-      </div>
-    </div>
-  );
-};
-
-const ProductsSection = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('All');
-  
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch('/api/products', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-
-      const data = await response.json();
-      setProducts(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+  const getCategoryIcon = (category) => {
+    switch (category?.toLowerCase()) {
+      case 'beef': return <GiCow className="text-red-600 w-5 h-5" />;
+      case 'chicken': return <GiChicken className="text-red-600 w-5 h-5" />;
+      case 'pork': return <GiPig className="text-red-600 w-5 h-5" />;
+      case 'venison': return <GiDeer className="text-red-600 w-5 h-5" />;
+      default: return null;
     }
   };
 
-  const handleAddToCart = (product) => {
-    console.log('Product added to cart:', product);
-  };
-
-  if (loading) {
-    return <div className="flex justify-center items-center h-64">Loading...</div>;
-  }
-
-  if (error) {
-    return (
-      <Alert variant="destructive" className="m-4">
-        <AlertDescription>{error}</AlertDescription>
-      </Alert>
-    );
-  }
-
-  const filteredProducts = activeCategory === 'All' 
-    ? products 
-    : products.filter(product => product.category === activeCategory);
-
   return (
-    <section className="py-16 bg-gray-50" id="products">
-      {/* Rest of the ProductsSection JSX remains the same */}
-    </section>
+    <div>
+      <div className="flex justify-center mb-4">
+        {categories.map(category => (
+          <button
+            key={category}
+            className={`px-4 py-2 mx-2 ${selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {error && (
+        <Alert variant="destructive" className="mb-4">
+          {error}
+        </Alert>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredProducts.map(product => (
+          <div
+            key={product.id}
+            className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              className={`w-full h-64 object-cover transition-transform duration-700 ${
+                isHovered ? 'scale-110' : 'scale-100'
+              }`}
+            />
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                {getCategoryIcon(product.category)}
+                <span className="text-gray-600 text-sm">{product.category}</span>
+              </div>
+              <h3 className="text-lg font-semibold">{product.name}</h3>
+              <p className="text-gray-600">${product.price}</p>
+              <button
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={() => handleAddToCart(product)}
+              >
+                {isAdded ? <BsCheckLg className="inline-block mr-2" /> : <BsBasket className="inline-block mr-2" />}
+                {isAdded ? 'Added' : 'Add to Basket'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
