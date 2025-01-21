@@ -3,12 +3,15 @@ import { GiCow, GiPig, GiChicken, GiDeer } from 'react-icons/gi';
 import { BsBasket, BsCheckLg } from 'react-icons/bs';
 import Alert from './Alert';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const ProductsSection = ({ products = [] }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isHovered, setIsHovered] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const categories = ['All', 'Beef', 'Chicken', 'Pork', 'Venison'];
 
@@ -18,23 +21,33 @@ const ProductsSection = ({ products = [] }) => {
 
   const handleAddToCart = async (product) => {
     try {
+      if (!user) {
+        navigate('/login');
+        return;
+      }
+
       const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
-      const response = await fetch('/api/add-to-cart', {
+      const response = await fetch('/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ userId, productId: product.id })
+        body: JSON.stringify({ productId: product.id })
       });
+
       const data = await response.json();
+
       if (response.ok) {
         setIsAdded(true);
         setTimeout(() => setIsAdded(false), 2000);
       } else {
+        if (response.status === 401) {
+          navigate('/login');
+        } else {
         setError(data.message || 'Failed to add to basket');
       }
+    }
     } catch (err) {
       setError('Network error. Please try again.');
     }

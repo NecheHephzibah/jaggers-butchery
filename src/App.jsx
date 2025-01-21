@@ -11,6 +11,9 @@ import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
 import CheckoutPage from './components/CheckoutPage';
 import OrderConfirmation from './components/OrderConfirmation';
+import { AuthProvider } from './context/AuthContext';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Home page component containing all sections
 const HomePage = () => (
@@ -18,7 +21,7 @@ const HomePage = () => (
     <HeroSection />
     <About showAsSection={true} />
     <FeaturesSection />
-    <ProductsSection showAsSection={true}/>
+    <ProductsSection showAsSection={true} />
     <Testimonials />
     <Partners />
     <Contact />
@@ -76,15 +79,27 @@ const ShopPage = () => {
 const App = () => {
   return (
     <Router>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order-confirmation" element={<OrderConfirmation />} />
-      </Routes>
+      <AuthProvider>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 };
