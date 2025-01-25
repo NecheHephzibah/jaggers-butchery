@@ -16,7 +16,7 @@ migrate = Migrate()
 paystack = None
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="dist", template_folder="dist")
 
     # Set configurations
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -41,6 +41,9 @@ def create_app():
 
     # Import routes and models here to avoid circular imports
     from . import routes, models
+    from market.routes import api
+
+    app.register_blueprint(api)
 
     return app
 
