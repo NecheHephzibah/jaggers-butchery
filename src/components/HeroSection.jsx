@@ -11,19 +11,19 @@ const HeroSection = () => {
 
   const slides = [
     {
-      image: "./src/assets/b2.jpg",
+      image: "../assets/b2.jpg",
       title: "From Farm to Fork, Every Step Matters.",
       subtitle: "Experience the finest cuts of meat, carefully selected and prepared for your dining pleasure.",
       overlayOpacity: "0"
     },
     {
-      image: "./src/assets/b1.jpg",
+      image: "../assets/b1.jpg",
       title: "Premium Quality Meat",
       subtitle: "State-of-the-art processing and preservation techniques for the best taste and nutrition.",
       overlayOpacity: "0"
     },
     {
-      image: "./src/assets/img3.jpg",
+      image: "../assets/img3.jpg",
       title: "Hygiene First",
       subtitle: "Experience meat processing redefined with our sterile and modern facilities.",
       overlayOpacity: "0"

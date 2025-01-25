@@ -16,7 +16,7 @@ const Partners = () => {
           {/* Partner 1 */}
           <div className="flex flex-col items-center">
             <img
-              src="./src/assets/farm_fresh.jpeg"
+              src="../assets/farm_fresh.jpeg"
               alt="Company 1 Logo"
               className="h-16 object-contain"
             />
@@ -26,7 +26,7 @@ const Partners = () => {
           {/* Partner 2 */}
           <div className="flex flex-col items-center">
             <img
-              src="./src/assets/logojag.png"
+              src="../assets/logojag.png"
               alt="Company 2 Logo"
               className="h-12 object-contain"
             />
@@ -36,7 +36,7 @@ const Partners = () => {
           {/* Partner 3 */}
           <div className="flex flex-col items-center">
             <img
-              src="./src/assets/adia-doaa.png"
+              src="../assets/adia-doaa.png"
               alt="Company 3 Logo"
               className="h-16 object-contain"
             />
@@ -46,7 +46,7 @@ const Partners = () => {
           {/* Partner 4 */}
           <div className="flex flex-col items-center">
             <img
-              src="./src/assets/farmers_gate.png"
+              src="../assets/farmers_gate.png"
               alt="Company 4 Logo"
               className="h-16 object-contain"
             />

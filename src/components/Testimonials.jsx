@@ -5,33 +5,33 @@ const Testimonials = () => {
     const testimonials = [
         {
             name: "Damian Okafor, Restaurant Owner",
-            image: "./src/assets/img0.jpg",
+            image: "../assets/img0.jpg",
             quote: "Jagger's Butchery has transformed the way I think about meat. The quality and care they put into their products are unmatched."
         },
         {
             name: "Jide Eze, Family Customer",
-            image: "./src/assets/img7.jpg",
+            image: "../assets/img7.jpg",
             quote: "I trust Jagger's Butchery for providing safe and nutritious meat for my family. Their innovative approach is commendable."
         },
         {
             name: "Nifemi Adebayo",
-            image: "./src/assets/img9.jpg",
+            image: "../assets/img9.jpg",
             quote: "The attention to detail at Jagger's is exceptional. Every cut of meat I've purchased has been perfectly trimmed and incredibly fresh."
         },
         {
             name: "Chef Jenny N.",
-            image: "./src/assets/img10.jpg",
+            image: "../assets/img10.jpg",
             quote: "Finally, a butcher that understands premium quality! I've been importing meat for years, but Jagger's local products match or exceed international standards."
         },
         {
             name: "Dr. Fabian Y., Food Safety Consultant",
-            image: "./src/assets/img12.jpg",
+            image: "../assets/img12.jpg",
             quote: "You can actually see their state-of-the-art facility through the viewing window, and their staff is always ready to explain their unique preservation techniques."
         },
     
         {
             name: "Wonder Amah",
-            image: "./src/assets/img11.jpg",
+            image: "../assets/img11.jpg",
             quote: "The meat quality is consistently excellent. "
         }
     ];

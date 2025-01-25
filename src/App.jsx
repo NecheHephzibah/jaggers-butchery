@@ -53,6 +53,9 @@ const ShopPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch('/api/products');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const data = await response.json();
         setProducts(data);
       } catch (err) {
@@ -88,7 +91,6 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-
           <Route path="/login" element={<Login />} />
           <Route
             path="/checkout"
@@ -105,3 +107,4 @@ const App = () => {
 };
 
 export default App;
+
