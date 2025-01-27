@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Checkout</h1>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Order Summary</h2>
+                <div id="order-items" class="space-y-4">
+                    {% for item in items %}
+                    <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                        <div class="flex items-center space-x-4">
+                            <img src="/assets/{{ item.imageUrl }}" alt="{{ item.name }}" class="w-16 h-16 object-cover rounded-md">
+                            <div>
+                                <h3 class="font-medium">{{ item.name }}</h3>
+                                <p class="text-gray-500 text-sm">{{ item.category }}</p>
+                            </div>
+                        </div>
+                        <span class="font-semibold">NGN{{ item.price|round(2) }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-6 border-t pt-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Total</span>
+                        <span class="font-bold text-xl">NGN{{ total|round(2) }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Payment Details</h2>
+                <form method="POST" action="{{ url_for('initiate_payment') }}" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Full Name</label>
+                        <input 
+                            type="text" 
+                            required 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Email Address</label>
+                        <input 
+                            type="email" 
+                            required 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            required 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        >
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full px-4 py-3 bg-amber-500 text-white font-semibold rounded-lg hover:bg-amber-600 transition duration-300 ease-in-out transform hover:scale-105"
+                    >
+                        Proceed to Payment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
