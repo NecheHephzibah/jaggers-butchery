@@ -15,7 +15,7 @@ const ProductsSection = ({ products = [], showAsSection = true }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  
 
   const categories = ['All', 'Beef', 'Chicken', 'Pork', 'Venison'];
 

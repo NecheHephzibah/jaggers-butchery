@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from "./components/Navigation";
-import HeroSection from "./components/HeroSection";
+import HomePage from './components/HomePage';
 import About from "./components/About";
-import FeaturesSection from "./components/FeaturesSection";
 import ProductsSection from "./components/ProductsSection";
-import Partners from "./components/Partners";
 import Contact from "./components/Contact";
-import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
-import CheckoutPage from './components/CheckoutPage';
-import OrderConfirmation from './components/OrderConfirmation';
-import { AuthProvider } from './context/AuthContext';
-import Login from './components/Login';
-import ProtectedRoute from './components/ProtectedRoute';
 
 // Home page component containing all sections
-const HomePage = () => (
+const HomePage_a = () => (
   <>
-    <HeroSection />
-    <About showAsSection={true} />
-    <FeaturesSection />
-    <ProductsSection showAsSection={true} />
-    <Testimonials />
-    <Partners />
-    <Contact />
-    <Footer />
+    <HomePage />
+    {/* <HeroSection /> */}
+    {/* <About showAsSection={true} /> */}
+    {/* <FeaturesSection /> */}
+    {/* <ProductsSection showAsSection={true} /> */}
+    {/* <Testimonials /> */}
+    {/* <Partners /> */}
+    {/* <Contact /> */}
+    {/* <Footer /> */}
   </>
 );
 
@@ -82,26 +75,16 @@ const ShopPage = () => {
 const App = () => {
   return (
     <Router>
-      <AuthProvider>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </AuthProvider>
+
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage_a />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+      
+
     </Router>
   );
 };
