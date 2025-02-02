@@ -1,4 +1,19 @@
 requirements.txt
+templates
+templates/login.html
+templates/register.html
+password_hashes.py
+templates/base.html
+forms.py
+.flaskenv
+package-lock.json
+package.json
+eslint.config.js
+postcss.config.js
+tailwind.config.js
+vite.config.js
+__pycache__
+
 
 # Logs
 logs

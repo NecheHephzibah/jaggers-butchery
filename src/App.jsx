@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation";
 import HomePage from './components/HomePage';
 import About from "./components/About";
 import ProductsSection from "./components/ProductsSection";
+import Checkout from './components/Checkout';
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -82,6 +83,7 @@ const App = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       
 
