@@ -36,7 +36,7 @@ def serve_frontend(path):
         return send_from_directory(frontend_dist_folder, path)
     return send_from_directory(frontend_dist_folder, 'index.html')
 
-@api.route('/api/check', methods=['GET'])
+@api.route('/api/checkout', methods=['GET'])
 def check_connection():
     return {'status': 'connected'}
 
