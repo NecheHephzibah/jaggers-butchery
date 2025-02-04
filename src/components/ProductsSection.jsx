@@ -62,7 +62,7 @@ const ProductsSection = ({ products = [], showAsSection = true }) => {
 
   return (
     <div className={`w-full ${showAsSection ? 'py-16' : 'pt-24 pb-16'} px-4 sm:px-6 lg:px-8`} id="shop">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mt-[50px]">
         {showAsSection && (
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Welcome to Abuja's independent butcher</h2>

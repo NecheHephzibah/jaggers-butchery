@@ -74,7 +74,7 @@ const Contact = () => {
         </Alert>
       )}
 
-      <div className="flex flex-col md:flex-row gap-12">
+      <div className="flex flex-col md:flex-row gap-12 mt-[80px]">
         <div className="md:w-1/2 text-stone-800 space-y-6">
           <h1 className="text-4xl font-medium uppercase text-yellow-900">Contact Us</h1>
           <p className="text-xl font-light">Looking for premium quality meat?</p>

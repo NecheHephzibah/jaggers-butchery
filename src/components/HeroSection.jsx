@@ -102,7 +102,7 @@ const HeroSection = () => {
       <div
         className={`absolute inset-0 transition-all duration-1000 ${
           isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-        }`}
+        } mt-[80px]`}
         id='hero'
       >
         {!isLoaded && (

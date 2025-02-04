@@ -6,7 +6,7 @@ const About = ({ showAsSection = "true" }) => {
             className={`bg-white ${showAsSection ? 'py-16' : 'pt-24 pb-16'} overflow-hidden`} 
             id="about"
         >
-            <article className="flex items-center justify-center px-6 lg:px-8">
+            <article className="flex items-center justify-center px-6 lg:px-8 mt-[50px]">
                 <section className="text-center max-w-3xl space-y-8">
                     <h1 
                         className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-wide text-gray-900"
