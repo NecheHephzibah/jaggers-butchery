@@ -2,7 +2,7 @@ from flask import Blueprint, send_from_directory, request, jsonify, session, ren
 from flask_login import login_user, logout_user, login_required, current_user
 import os
 from flask_cors import CORS, cross_origin
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import generate_csrf
 import time
 import hashlib
 from .models import User, Item, CartItem
@@ -59,27 +59,29 @@ def get_products():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@api.route('/api/checkout', methods=['POST'])
+@api.route('/api/checkout', methods=['GET', 'POST'])
 def checkout():
     try:
         data = request.get_json()
-        print(f"Received data: {data}")  # Debugging information
-        if not data:
-            return jsonify({'error': 'No data provided'}), 400
+        print(f"Received data: {data}")
 
         customer_info = data.get('customerInfo')
         cart_items = data.get('cart')
         
         if not customer_info or not cart_items:
+            print("Missing required information")
             return jsonify({'error': 'Missing required information'}), 400
 
         total_amount = sum(item.get('price', 0) for item in cart_items)
         reference = secrets.token_hex(16)
 
         try:
+            print(f"Initializing Paystack transaction with amount: {total_amount}")
+            print(f"Customer email: {customer_info.get('email')}")
+            
             response = Transaction.initialize(
                 reference=reference,
-                amount=int(total_amount * 100),
+                amount=int(total_amount * 100),  # Convert to kobo
                 email=customer_info.get('email'),
                 metadata={
                     'customer_name': customer_info.get('name'),
@@ -88,30 +90,37 @@ def checkout():
                     'cart_items': [item.get('id') for item in cart_items]
                 }
             )
+            
+            
+            print(f"Paystack response: {response}")
 
-            if response['status']:
-                session['payment_reference'] = reference
-                session['cart_items'] = [item.get('id') for item in cart_items]
-                
+            if response.get('status'):
                 return jsonify({
                     'status': 'success',
                     'authorization_url': response['data']['authorization_url'],
                     'reference': reference
                 })
             else:
+                print(f"Paystack error: {response.get('message')}")
                 return jsonify({
                     'status': 'error',
-                    'message': 'Failed to initialize payment'
+                    'message': response.get('message', 'Failed to initialize payment')
                 }), 400
 
         except Exception as e:
+            print(f"Paystack API error: {str(e)}")
             return jsonify({
                 'status': 'error',
                 'message': str(e)
             }), 500
 
     except Exception as e:
+        print(f"Server error: {str(e)}") 
         return jsonify({'error': str(e)}), 500
+@api.route('/api/csrf-token', methods=['GET'])
+def get_csrf_token():
+    token = generate_csrf()
+    return jsonify({'csrf_token': token})
 
 @api.route('/api/verify-payment/<reference>', methods=['GET'])
 def verify_payment(reference):
