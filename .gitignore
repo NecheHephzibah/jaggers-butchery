@@ -15,6 +15,7 @@ vite.config.js
 __pycache__
 
 
+
 # Logs
 logs
 *.log

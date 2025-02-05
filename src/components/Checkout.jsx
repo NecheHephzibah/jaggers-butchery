@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Trash2 } from 'lucide-react';
 
-
-
 const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [customerInfo, setCustomerInfo] = useState({
@@ -13,18 +11,21 @@ const Checkout = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [csrfToken, setCsrfToken] = useState('');
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCart(savedCart);
 
-
-
     // Fetch CSRF token
     const fetchCsrfToken = async () => {
-      const response = await fetch('/api/csrf-token');
-      const data = await response.json();
-      fetchCsrfToken(data.csrf_token);
+      try {
+        const response = await fetch('/api/csrf-token');
+        const data = await response.json();
+        setCsrfToken(data.csrf_token);
+      } catch (err) {
+        console.error('Failed to fetch CSRF token:', err);
+      }
     };
 
     fetchCsrfToken();
@@ -48,9 +49,6 @@ const Checkout = () => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
-
     setLoading(true);
     setError(null);
 
@@ -59,7 +57,7 @@ const Checkout = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
+          'X-CSRFToken': csrfToken
         },
         body: JSON.stringify({
           customerInfo,
@@ -69,7 +67,7 @@ const Checkout = () => {
 
       const data = await response.json();
 
-      if (data.status === 'success') {
+      if (data.status === 'success' && data.authorization_url) {
         // Redirect to Paystack payment page
         window.location.href = data.authorization_url;
       } else {
@@ -77,6 +75,7 @@ const Checkout = () => {
       }
     } catch (err) {
       setError('Failed to process checkout. Please try again.');
+      console.error('Checkout error:', err);
     } finally {
       setLoading(false);
     }
@@ -94,7 +93,6 @@ const Checkout = () => {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Cart Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Your Cart</h3>
             {cart.length === 0 ? (
@@ -122,16 +120,9 @@ const Checkout = () => {
             )}
           </div>
 
-          {/* Customer Information Form */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Customer Information</h3>
             <form onSubmit={handleCheckout} className="space-y-4">
-              {/* Add CSRF Token input */}
-              <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value={document.querySelector('[name=csrfmiddlewaretoken]')?.value || ''}
-              />
               <div>
                 <label className="block text-sm font-medium text-gray-700">Email</label>
                 <input
