@@ -9,13 +9,11 @@ from .models import User, Item, CartItem
 import jwt
 from .extensions import db, bcrypt
 import secrets
-from paystackapi.paystack import Paystack
 from paystackapi.transaction import Transaction
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.exceptions import BadRequest
 
-# Initialize Paystack API
-paystack = Paystack()
+from . import paystack
 
 # Create blueprint
 api = Blueprint('api', __name__)

@@ -9,7 +9,7 @@ const About = ({ showAsSection = "true" }) => {
             <article className="flex items-center justify-center px-6 lg:px-8 mt-[50px]">
                 <section className="text-center max-w-3xl space-y-8">
                     <h1 
-                        className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-wide text-gray-900"
+                        className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-wide text-gray-900 transition-all duration-1000 transform hover:scale-105 hover:text-yellow-700"
                         style={{
                             opacity: 0,
                             animation: 'fadeIn 1s ease-in forwards'

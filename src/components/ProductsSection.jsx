@@ -66,7 +66,7 @@ const ProductsSection = ({ products = [], showAsSection = true }) => {
         {showAsSection && (
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Welcome to Abuja's independent butcher</h2>
-            <p className="mt-4 text-lg text-gray-500">Offering quality free-range meats sourced Northern private farms with high standards of husbandry and care. </p>
+            <p className="mt-4 text-lg text-gray-500">Offering quality free-range meats sourced from Northern private farms with high standards of husbandry and care. </p>
           </div>
         )}
 

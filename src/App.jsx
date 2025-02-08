@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from "./components/Navigation";
 import HomePage from './components/HomePage';
 import About from "./components/About";
+import BlogSection from "./components/BlogSection";
 import ProductsSection from "./components/ProductsSection";
 import Checkout from './components/Checkout';
 import Contact from "./components/Contact";
@@ -29,6 +30,13 @@ const AboutPage = () => (
     <About showAsSection={false} />
     <Footer />
   </>
+);
+
+const BlogPage = () => (
+  <>
+    <BlogSection />
+    <Footer />
+  </> 
 );
 
 const ContactPage = () => (
@@ -81,6 +89,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage_a />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/checkout" element={<Checkout />} />
