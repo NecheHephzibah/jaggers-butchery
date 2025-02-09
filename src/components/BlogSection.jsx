@@ -78,7 +78,7 @@ const BlogSection = () => {
             title: "The Art of Dry Aging: Transform Your Meat's Flavor Profile",
             category: "Techniques",
             excerpt: "Discover how the dry aging process enhances meat flavor and tenderness. Learn about the science behind this premium technique and why it's worth the wait.",
-            image: "/api/placeholder/800/600", // Replace with actual dry aged meat image
+            image: "../assets/dried-aged.jpg",
             readTime: "5 min read",
             author: "Chef James Morgan",
             date: "2024-02-08"
@@ -87,16 +87,16 @@ const BlogSection = () => {
             title: "Understanding Premium Cuts: A Guide to Luxury Meats",
             category: "Education",
             excerpt: "From Wagyu to Angus, explore the world's most prestigious meat cuts. Learn what makes each special and how to select the perfect cut for your needs.",
-            image: "/api/placeholder/800/600", // Replace with actual premium cuts image
+            image: "../assets/premium-cuts.webp",
             readTime: "7 min read",
-            author: "Hephzibah Onovo",
+            author: "Memphys Omondi",
             date: "2024-02-08"
         },
         {
             title: "Sustainable Butchery: The Future of Meat Processing",
             category: "Industry",
             excerpt: "Explore how modern butcheries are adopting sustainable practices while maintaining quality. Learn about zero-waste approaches and ethical sourcing.",
-            image: "/api/placeholder/800/600", // Replace with actual sustainable butchery image
+            image: "../assets/butchery.jpg",
             readTime: "6 min read",
             author: "Hephzibah Onovo",
             date: "2024-02-08"
