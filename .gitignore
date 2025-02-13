@@ -1,4 +1,3 @@
-requirements.txt
 templates
 templates/login.html
 templates/register.html
